@@ -3,15 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <!-- HTML Meta Tags -->
-    <title>Avator</title>
+    <title>Avator 2d</title>
     <meta
       name="description"
       content="Track face and body rigs just your browser webcam!"
     />
-
     <meta
       name="twitter:description"
       content="Track face and body rigs just your browser webcam!"
+    />
+    <meta
+      name="twitter:image"
+      content="https://cdn.glitch.com/239c5934-4d83-4c5c-bef6-44dcdb04c8fb%2Fkalidoface-meta.jpg?v=1630110302224"
     />
     <meta
       name="viewport"
@@ -21,18 +24,16 @@
       rel="shortcut icon"
       href="https://yeemachine.github.io/kalidoface-live2d-models/Icons/icon-circle.svg"
     />
-
-    <!--     Basic Three.js -->
-    <script src="https://unpkg.com/three@0.133.0/build/three.js"></script>
-    <!--     GLTF Loader for Three.js -->
-    <script src="https://unpkg.com/three@0.133.0/examples/js/loaders/GLTFLoader.js"></script>
-    <!--     Orbit Controls for Three.js -->
-    <script src="https://unpkg.com/three@0.133.0/examples/js/controls/OrbitControls.js"></script>
-    <!--     VRM Loader for Three.js -->
-    <script src="https://unpkg.com/@pixiv/three-vrm@0.6.7/lib/three-vrm.js"></script>
+    <!--     Live2D SDK  -->
+    <script src="https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/dylanNew/live2d/webgl/Live2D/lib/live2d.min.js"></script>
+    <!--     PixiJS Renderer -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.1.3/pixi.min.js"></script>
+    <!--     PixiJS Live2D Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display/dist/index.min.js"></script>
     <!--     Mediapipe or Tensorflow.js -->
     <script
-      src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic@0.5.1635989137/holistic.js"
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"
       crossorigin="anonymous"
     ></script>
 
@@ -48,19 +49,26 @@
     ></script>
     <!--     Kalidokit Kinematic Solver -->
     <script src="https://cdn.jsdelivr.net/npm/kalidokit@1.1/dist/kalidokit.umd.js"></script>
+
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="preview">
-      <video class="input_video" width="1280px" height="720px"  autoplay muted playsinline></video>
+      <video class="input_video" width="1280px" height="720px" autoplay muted playsinline></video>
       <canvas class="guides"></canvas>
       <section>
-        <a href="https://lesterleefat0418.github.io/mediapipe-web-based/avatar2d/"><p>Live2D</p></a>
-        <a class="current" href="./avatar/"
-          ><p>VRM</p></a
+        <a class="current" href="./avatar2d/"
+          ><p>Live2D</p></a
         >
+        <a href="http://localhost/mediapipe/avatar/"><p>VRM</p></a>
       </section>
     </div>
-    <script src="script.js"></script>
+    
+    <canvas id="live2d"></canvas>
+    <p class="linkOut">
+      Visit
+      <a id="full" href="https://kalidoface.com">the full Vtuber App</a>!
+    </p>
+    <script type="module" src="script.js"></script>
   </body>
 </html>

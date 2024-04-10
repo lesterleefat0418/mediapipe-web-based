@@ -55,7 +55,7 @@
       <video class="input_video" width="1280px" height="720px"  autoplay muted playsinline></video>
       <canvas class="guides"></canvas>
       <section>
-        <a href="https://lesterleefat0418.github.io/mediapipe-web-based/avatar2d/"><p>Live2D</p></a>
+        <a href="http://localhost/mediapipe/avatar2d/"><p>Live2D</p></a>
         <a class="current" href="./avatar/"
           ><p>VRM</p></a
         >
