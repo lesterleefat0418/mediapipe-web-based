@@ -1,98 +1,66 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
-  <link rel="shortcut icon" href="favicon.ico" />
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.1/control_utils.css" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="demo.css" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.1/camera_utils.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.1/control_utils.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.1/drawing_utils.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_detection@0.0/face_detection.js" crossorigin="anonymous"></script>
-</head>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!-- HTML Meta Tags -->
+    <title>Avator</title>
+    <meta
+      name="description"
+      content="Track face and body rigs just your browser webcam!"
+    />
 
-<body>
-  
-  <!-- BULMA NAVBAR -->
-  <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="index.html">
-        <img src="https://camo.githubusercontent.com/82f2bfa2005e2755362d419da02d788b366506b0d55212c160abd5100f3a8822/68747470733a2f2f312e62702e626c6f6773706f742e636f6d2f2d7753746b30565a44664d6b2f59434330474952507244492f41414141414141414147632f31796a37494f556564766f654f3143754378713745544c57304671586e69366d77434c63424741735948512f733332302f6c6f676f746578742e706e67" >
-      </a>
-  
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
+    <meta
+      name="twitter:description"
+      content="Track face and body rigs just your browser webcam!"
+    />
+    <meta
+      name="viewport"
+      content="viewport-fit=cover, user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <link
+      rel="shortcut icon"
+      href="https://yeemachine.github.io/kalidoface-live2d-models/Icons/icon-circle.svg"
+    />
+
+    <!--     Basic Three.js -->
+    <script src="https://unpkg.com/three@0.133.0/build/three.js"></script>
+    <!--     GLTF Loader for Three.js -->
+    <script src="https://unpkg.com/three@0.133.0/examples/js/loaders/GLTFLoader.js"></script>
+    <!--     Orbit Controls for Three.js -->
+    <script src="https://unpkg.com/three@0.133.0/examples/js/controls/OrbitControls.js"></script>
+    <!--     VRM Loader for Three.js -->
+    <script src="https://unpkg.com/@pixiv/three-vrm@0.6.7/lib/three-vrm.js"></script>
+    <!--     Mediapipe or Tensorflow.js -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic@0.5.1635989137/holistic.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!--     Mediapipe Drawing Tools -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <!--     Mediapipe Camera Tools -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <!--     Kalidokit Kinematic Solver -->
+    <script src="https://cdn.jsdelivr.net/npm/kalidokit@1.1/dist/kalidokit.umd.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="preview">
+      <video class="input_video" width="1280px" height="720px"  autoplay muted playsinline></video>
+      <canvas class="guides"></canvas>
+      <section>
+        <a href="https://lesterleefat0418.github.io/mediapipe-web-based/avatar2d/"><p>Live2D</p></a>
+        <a class="current" href="./avatar/"
+          ><p>VRM</p></a
+        >
+      </section>
     </div>
-  
-    <div id="navbarBasicExample" class="navbar-menu">
-      <div class="navbar-start">
-        <a class="navbar-item" href="face.html">
-          Face
-        </a>
-  
-        <a class="navbar-item" href="faceMesh.html">
-          Face Mesh
-        </a>
-
-        <a class="navbar-item" href="hands.html">
-          Hands
-        </a>
-
-        <a class="navbar-item" href="pose.html">
-          Pose
-        </a>
-        
-        <a class="navbar-item" href="holistic.html">
-          Holistic
-        </a>
-        </div>
-      </div>
-  
-    </div>
-  </nav>
-
-  <!-- CONTENTS -->
-  <div class="container" style="margin-top: 20px;">
-
-    <div class="columns">
-      
-      <!-- WEBCAM INPUT -->
-      <div class="column">
-        <article class="panel is-info">
-          <p class="panel-heading">
-            Webcam Input
-          </p>
-          <div class="panel-block">
-            <video class="input_video1"></video>
-          </div>
-        </article>
-      </div>
-
-      <!-- MEDIAPIPE OUTPUT -->
-      <div class="column">
-        <article class="panel is-info">
-          <p class="panel-heading">
-            Mediapipe Face Detection
-          </p>
-          <div class="panel-block">
-            <canvas class="output1" width="480px" height="480px"></canvas>
-          </div>
-        </article>
-      </div>
-    </div>
-    
-    <div class="loading">
-      <div class="spinner"></div>
-    </div>
-  </div>
-
-  <div style="visibility: hidden;" class="control1">
-  </div>
-
-  <script type="text/javascript" src="./js/face.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
